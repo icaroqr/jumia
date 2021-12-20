@@ -1,11 +1,8 @@
 package com.jumia.apiexercise.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
-@AllArgsConstructor
+@Data
 public class CountryDto {
     
     private String country;
@@ -19,26 +16,31 @@ public class CountryDto {
             this.country="Cameroon";
             this.countryCode="+237";
             this.state="valid";
+            return;
         }else
         if(phone.matches("\\(251\\)\\ ?[1-59]\\d{8}$")){
             this.country="Ethiopia";
             this.countryCode="+251";
             this.state="valid";
+            return;
         }else
         if(phone.matches("\\(212\\)\\ ?[5-9]\\d{8}$")){
             this.country="Morocco";
             this.countryCode="+212";
             this.state="valid";
+            return;
         }else
         if(phone.matches("\\(258\\)\\ ?[28]\\d{7,8}$")){
             this.country="Mozambique";
             this.countryCode="+258";
             this.state="valid";
+            return;
         }else
         if(phone.matches("\\(256\\)\\ ?\\d{9}$")){
             this.country="Uganda";
             this.countryCode="+256";
             this.state="valid";
+            return;
         }else{
             this.country="Invalid country";
             this.countryCode="Invalid code";

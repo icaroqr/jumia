@@ -3,14 +3,9 @@ package com.jumia.apiexercise.domain;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@Getter @Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@Data
 @Entity
 public class Customer {
 
