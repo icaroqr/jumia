@@ -18,11 +18,17 @@ public class CustomerDto {
     //@NotBlank
     private String phone;
 
+    private String countryName;
+
+    private String state;
+
     public CustomerDto(Customer customer){
         this.id = customer.getId();
         this.name = customer.getName();
         this.phone = customer.getPhone();
         this.id_country = customer.getCountry() != null ? customer.getCountry().getId() : 0;
+        this.countryName = customer.getCountry() != null ? customer.getCountry().getName() : "";
+        this.state = customer.getCountry() != null ? customer.getCountry().getState() : "";
     }
 
     public static List<CustomerDto> toList(List<Customer> customerList){
