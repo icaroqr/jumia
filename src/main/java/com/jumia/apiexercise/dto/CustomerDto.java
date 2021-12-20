@@ -11,26 +11,18 @@ public class CustomerDto {
 
     private int id;
 
+    private int id_country;
+
     private String name;
 
     //@NotBlank
     private String phone;
 
-    private String country;
-
-    private String countryCode;
-
-    private String state;
-
     public CustomerDto(Customer customer){
         this.id = customer.getId();
         this.name = customer.getName();
         this.phone = customer.getPhone();
-
-        CountryDto countryDto = new CountryDto(customer.getPhone());
-        this.country = countryDto.getCountry();
-        this.countryCode = countryDto.getCountryCode();
-        this.state = countryDto.getState();
+        this.id_country = customer.getCountry() != null ? customer.getCountry().getId() : 0;
     }
 
     public static List<CustomerDto> toList(List<Customer> customerList){

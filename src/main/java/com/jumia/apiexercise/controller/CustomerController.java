@@ -33,4 +33,10 @@ public class CustomerController {
 		PageRequestModel pageModel = new PageRequestModel(params);
         return ResponseEntity.status(HttpStatus.FOUND).body(customerService.listAllPagingOrderingAndFiltering(pageModel));
 	}
+
+    @GetMapping(value = "/fillCustomerCountry", produces="application/json")
+    public ResponseEntity<String> fillCustomerCountry(){
+        return ResponseEntity.status(HttpStatus.OK).body(customerService.fillCustomerCountry());
+    }
+
 }

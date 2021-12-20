@@ -2,6 +2,7 @@ package com.jumia.apiexercise.domain;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 import lombok.Data;
 
@@ -15,6 +16,9 @@ public class Customer {
     private String name;
 
     private String phone;
+
+    @OneToOne
+    private Country country;
 
     
 }
