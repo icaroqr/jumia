@@ -30,8 +30,8 @@ public class CustomerController {
 
     @GetMapping(value = "/filter", produces="application/json")
 	public ResponseEntity<PageModel<CustomerDto>> findAllFiltering(@RequestParam Map<String, String> params) {
-		PageRequestModel pageModel = new PageRequestModel(params);
-        return ResponseEntity.status(HttpStatus.FOUND).body(customerService.listAllPagingOrderingAndFiltering(pageModel));
+		PageRequestModel pageRequestModel = new PageRequestModel(params);
+        return ResponseEntity.status(HttpStatus.FOUND).body(customerService.listAllFilteringPagingAndOrdering(pageRequestModel));
 	}
 
     @GetMapping(value = "/fillCustomerCountry", produces="application/json")

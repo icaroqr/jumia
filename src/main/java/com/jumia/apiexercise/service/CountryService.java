@@ -28,12 +28,15 @@ public class CountryService {
     @Transactional
     public String fillCountryTable(){
         List<CustomerDto> customersList = customerService.listAll();
-        Set<Country> countryList = new HashSet<Country>();
+        List<Country> existingCountriesList = countryRepository.findAll();
+        Set<Country> newCountriesList = new HashSet<Country>();
         for (CustomerDto customerDto : customersList) {
             Country c = new Country(customerDto.getPhone());
-            countryList.add(c);
+            if(!existingCountriesList.contains(c)){
+                newCountriesList.add(c);
+            }
         }
-        countryRepository.saveAll(countryList);
+        countryRepository.saveAll(newCountriesList);
         return "Country table successful filled";
     }
 

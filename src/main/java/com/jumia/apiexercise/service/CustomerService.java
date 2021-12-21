@@ -12,10 +12,12 @@ import com.jumia.apiexercise.model.PageModel;
 import com.jumia.apiexercise.model.PageRequestModel;
 import com.jumia.apiexercise.repository.CountryRepository;
 import com.jumia.apiexercise.repository.CustomerRepository;
+import com.jumia.apiexercise.specification.CustomerSpecification;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -38,12 +40,20 @@ public class CustomerService {
     }
 
     @Transactional
-    public PageModel<CustomerDto> listAllPagingOrderingAndFiltering(PageRequestModel pageModel){
-        Pageable pageable = pageModel.toSpringPageRequest();
-        Page<Customer> page = customerRepository.findAll(pageable);
+    public PageModel<CustomerDto> listAllFilteringPagingAndOrdering(PageRequestModel pageRequestModel){
+        Pageable pageable = pageRequestModel.toSpringPageRequest();
+        
+        Specification<Customer> spec = Specification.where(
+            CustomerSpecification.equalCountryName(pageRequestModel.getCountry())).and(
+            CustomerSpecification.equalCountryState(pageRequestModel.getState()));
+        
+            Page<Customer> page = customerRepository.findAll(spec,pageable);
         if(!page.isEmpty()){
-            return new PageModel<CustomerDto>((int) page.getTotalElements(), page.getSize(), 
-                                                page.getTotalPages(),CustomerDto.toList(page.getContent()));
+            return new PageModel<CustomerDto>(
+                                        (int) page.getTotalElements(),
+                                        page.getSize(), 
+                                        page.getTotalPages(),
+                                        CustomerDto.toList(page.getContent()));
         }else{
             throw new NotFoundException("No customers were found.");
         }
@@ -53,9 +63,11 @@ public class CustomerService {
     public String fillCustomerCountry() {
         List<Customer> customerList = customerRepository.findAll();
         for (Customer customer : customerList) {
-            Country country = new Country(customer.getPhone());
-            customer.setCountry(countryRepository.findByName(country.getName()).get());
-            customerRepository.save(customer);
+            if(customer.getCountry() == null){
+                Country country = new Country(customer.getPhone());
+                customer.setCountry(countryRepository.findByName(country.getName()).get());
+                customerRepository.save(customer);
+            }
         }
         return "Customers Country updated";
     }

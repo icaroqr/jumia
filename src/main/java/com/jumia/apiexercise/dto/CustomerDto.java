@@ -5,8 +5,10 @@ import java.util.List;
 
 import com.jumia.apiexercise.domain.Customer;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 @Data
+@AllArgsConstructor
 public class CustomerDto {
 
     private int id;

@@ -30,4 +30,4 @@ curl https://localhost:8080/customers/filter?sort=country&size=20&page=1
 Return pages of 10 customers ordering by state DESC (use "-" for descending order)
 ```
 curl https://localhost:8080/customers/filter?sort=-country.state&size=10
-``
+```
