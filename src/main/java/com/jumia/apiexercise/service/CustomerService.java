@@ -71,4 +71,12 @@ public class CustomerService {
         }
         return "Customers Country updated";
     }
+
+    public Customer getCustomerByName(String name) {
+        return customerRepository.findByName(name).orElseThrow(()-> new NotFoundException("No customer found with name: "+name));
+    }
+
+    public Customer getCustomerById(Integer id) {
+        return customerRepository.findById(id).orElseThrow(()-> new NotFoundException("No customer found with id: "+id));
+    }
 }

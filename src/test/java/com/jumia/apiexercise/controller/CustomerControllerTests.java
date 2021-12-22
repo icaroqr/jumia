@@ -34,7 +34,7 @@ public class CustomerControllerTests {
     private CustomerService service;
 
     @Test
-    private void givenCustomer_whenGetCustomers_thenReturnJsonArray() throws Exception{
+    public void givenCustomer_whenGetCustomers_thenReturnJsonArray() throws Exception{
         CustomerDto customer = new CustomerDto(0,0,"Jumia Customer","(211) 704244430",null,null);
         List<CustomerDto> customers = new ArrayList<CustomerDto>();
         customers.add(customer);
@@ -42,7 +42,7 @@ public class CustomerControllerTests {
         given(service.listAll()).willReturn(customers);
         
         mvc.perform(get("/customers/").contentType(MediaType.APPLICATION_JSON))
-           .andExpect(status().isOk())
+           .andExpect(status().isFound())
            .andExpect(jsonPath("$", hasSize(1)))
            .andExpect(jsonPath("$[0].name", is(customer.getName())));
     }
