@@ -34,4 +34,9 @@ public class PhoneController {
         return ResponseEntity.status(HttpStatus.FOUND).body(phoneService.listAllFilteringPagingAndOrdering(pageRequestModel));
 	}
 
+    @GetMapping(value = "/fillPhoneCountry", produces="application/json")
+	public ResponseEntity<String> fillPhoneCountry() {
+        return ResponseEntity.status(HttpStatus.CREATED).body(phoneService.fillPhoneCountry());
+	}
+
 }

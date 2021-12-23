@@ -4,11 +4,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.jumia.apiexercise.domain.Country;
 import com.jumia.apiexercise.domain.Phone;
 import com.jumia.apiexercise.dto.PhoneDto;
 import com.jumia.apiexercise.exception.NotFoundException;
 import com.jumia.apiexercise.model.PageModel;
 import com.jumia.apiexercise.model.PageRequestModel;
+import com.jumia.apiexercise.repository.CountryRepository;
 import com.jumia.apiexercise.repository.PhoneRepository;
 import com.jumia.apiexercise.specification.PhoneSpecification;
 
@@ -23,6 +25,9 @@ public class PhoneService {
     
     @Autowired
     private PhoneRepository phoneRepository;
+
+    @Autowired
+    private CountryRepository countryRepository;
 
     @Transactional
     public List<PhoneDto> listAll(){
@@ -52,5 +57,23 @@ public class PhoneService {
         }else{
             throw new NotFoundException("No phones were found.");
         }
+    }
+
+    @Transactional
+    public String fillPhoneCountry() {
+        List<Phone> phoneList = phoneRepository.findAll();
+        for (Phone phone : phoneList) {
+            if(phone.getCountry() == null){
+                Country country = new Country(phone.getNumber());
+                phone.setCountry(countryRepository.findByName(country.getName()).get());
+                if(country.getCode() == 0){
+                    phone.setState("not valid");
+                }else{
+                    phone.setState("valid");
+                }
+                phoneRepository.save(phone);
+            }
+        }
+        return "Phones Country updated";
     }
 }
