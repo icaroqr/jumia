@@ -5,9 +5,11 @@ import java.util.List;
 
 import com.jumia.apiexercise.domain.Phone;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 @Data
+@AllArgsConstructor
 public class PhoneDto {
 
     private int id;
@@ -20,8 +22,10 @@ public class PhoneDto {
 
     public static List<PhoneDto> toList(List<Phone> list) {
         List<PhoneDto> dtoList = new ArrayList<PhoneDto>();
-        for (Phone phone : list) {
-            dtoList.add(new PhoneDto(phone));
+        if(list != null){
+            for (Phone phone : list) {
+                dtoList.add(new PhoneDto(phone));
+            }
         }
         return dtoList;
     }

@@ -76,4 +76,8 @@ public class PhoneService {
         }
         return "Phones Country updated";
     }
+
+    public Phone getPhoneByNumber(String number) {
+        return phoneRepository.findByNumber(number).orElseThrow(()-> new NotFoundException("Phone not found for number: "+number));
+    }
 }
