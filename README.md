@@ -19,15 +19,19 @@ docker run -p 8080:8080 api-exercise
 ## Testing API
 
 ### cURLs requests
-Return all customers
+Return all phones
 ```
-curl https://localhost:8080/customers/
+curl https://localhost:8080/phones/
 ```
-Return the first page of 20 customers ordering by Country ASC
+Return the first page of 10 phones list ordering by state ASC
 ```
-curl https://localhost:8080/customers/filter?sort=country&size=20&page=1
+curl https://localhost:8080/phones/filter?size=10&page=0&sort=state
 ```
-Return pages of 10 customers ordering by state DESC (use "-" for descending order)
+Return the first paget of 10 phones filtering by Uganda country
 ```
-curl https://localhost:8080/customers/filter?sort=-country.state&size=10
+curl https://localhost:8080/phones/filter?size=10&page=0&country=Uganda
+```
+Return pages of phones ordering by state DESC (use "-" for descending order)
+```
+curl https://localhost:8080/phones/filter?size=10&sort=-state
 ```

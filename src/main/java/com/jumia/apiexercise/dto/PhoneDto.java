@@ -16,6 +16,8 @@ public class PhoneDto {
 
     private String state;
 
+    private String countryName;
+
     public static List<PhoneDto> toList(List<Phone> list) {
         List<PhoneDto> dtoList = new ArrayList<PhoneDto>();
         for (Phone phone : list) {
@@ -28,6 +30,7 @@ public class PhoneDto {
         this.id = phone.getId();
         this.number = phone.getNumber();
         this.state = phone.getState();
+        this.countryName = phone.getCountry() != null ? phone.getCountry().getName() : null;
     }
     
 }
