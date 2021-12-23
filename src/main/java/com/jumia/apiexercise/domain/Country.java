@@ -21,60 +21,37 @@ public class Country {
 
     private String name;
 
-    private int countryCode;
-
-    private String state;
+    private int code;
 
     public Country(String phone){
         if(phone.matches("\\(237\\)\\ ?[2368]\\d{7,8}$")){
             this.name="Cameroon";
-            this.countryCode=237;
-            this.state="valid";
+            this.code=237;
             return;
         }else
         if(phone.matches("\\(251\\)\\ ?[1-59]\\d{8}$")){
             this.name="Ethiopia";
-            this.countryCode=251;
-            this.state="valid";
+            this.code=251;
             return;
         }else
         if(phone.matches("\\(212\\)\\ ?[5-9]\\d{8}$")){
             this.name="Morocco";
-            this.countryCode=212;
-            this.state="valid";
+            this.code=212;
             return;
         }else
         if(phone.matches("\\(258\\)\\ ?[28]\\d{7,8}$")){
             this.name="Mozambique";
-            this.countryCode=258;
-            this.state="valid";
+            this.code=258;
             return;
         }else
         if(phone.matches("\\(256\\)\\ ?\\d{9}$")){
             this.name="Uganda";
-            this.countryCode=256;
-            this.state="valid";
+            this.code=256;
             return;
         }else{
             this.name="Invalid country";
-            this.countryCode=0;
-            this.state="not valid";
+            this.code=0;
         }
     }
 
-    @Override
-    public boolean equals(Object o){
-        if(o == this) return true;
-        if(o instanceof Country){
-            Country other = (Country) o;
-            if(other.getName().equals(this.name)) return true;
-        } 
-        return false;
-    }
-
-    @Override
-    public int hashCode() {
-        return (this.name.hashCode() + this.state.hashCode());        
-    }
-    
 }

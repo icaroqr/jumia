@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
-import com.jumia.apiexercise.domain.Country;
 import com.jumia.apiexercise.domain.Customer;
 import com.jumia.apiexercise.dto.CustomerDto;
 import com.jumia.apiexercise.exception.NotFoundException;
 import com.jumia.apiexercise.model.PageModel;
 import com.jumia.apiexercise.model.PageRequestModel;
-import com.jumia.apiexercise.repository.CountryRepository;
 import com.jumia.apiexercise.repository.CustomerRepository;
 import com.jumia.apiexercise.specification.CustomerSpecification;
 
@@ -25,9 +23,6 @@ public class CustomerService {
     
     @Autowired
     private CustomerRepository customerRepository;
-
-    @Autowired
-    private CountryRepository countryRepository;
 
     @Transactional
     public List<CustomerDto> listAll(){
@@ -45,7 +40,7 @@ public class CustomerService {
         
         Specification<Customer> spec = Specification.where(
             CustomerSpecification.equalCountryName(pageRequestModel.getCountry())).and(
-            CustomerSpecification.equalCountryState(pageRequestModel.getState()));
+            CustomerSpecification.equalPhoneState(pageRequestModel.getState()));
         
             Page<Customer> page = customerRepository.findAll(spec,pageable);
         if(!page.isEmpty()){
@@ -57,19 +52,6 @@ public class CustomerService {
         }else{
             throw new NotFoundException("No customers were found.");
         }
-    }
-
-    @Transactional
-    public String fillCustomerCountry() {
-        List<Customer> customerList = customerRepository.findAll();
-        for (Customer customer : customerList) {
-            if(customer.getCountry() == null){
-                Country country = new Country(customer.getPhone());
-                customer.setCountry(countryRepository.findByName(country.getName()).get());
-                customerRepository.save(customer);
-            }
-        }
-        return "Customers Country updated";
     }
 
     public Customer getCustomerByName(String name) {

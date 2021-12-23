@@ -9,7 +9,7 @@ import javax.transaction.Transactional;
 
 import com.jumia.apiexercise.domain.Country;
 import com.jumia.apiexercise.dto.CountryDto;
-import com.jumia.apiexercise.dto.CustomerDto;
+import com.jumia.apiexercise.dto.PhoneDto;
 import com.jumia.apiexercise.exception.NotFoundException;
 import com.jumia.apiexercise.repository.CountryRepository;
 
@@ -20,18 +20,18 @@ import org.springframework.stereotype.Service;
 public class CountryService {
     
     @Autowired
-    private CustomerService customerService;
+    private PhoneService phoneService;
 
     @Autowired
     private CountryRepository countryRepository;
 
     @Transactional
     public String fillCountryTable(){
-        List<CustomerDto> customersList = customerService.listAll();
+        List<PhoneDto> phoneList = phoneService.listAll();
         List<Country> existingCountriesList = countryRepository.findAll();
         Set<Country> newCountriesList = new HashSet<Country>();
-        for (CustomerDto customerDto : customersList) {
-            Country c = new Country(customerDto.getPhone());
+        for (PhoneDto phone : phoneList) {
+            Country c = new Country(phone.getNumber());
             if(!existingCountriesList.contains(c)){
                 newCountriesList.add(c);
             }

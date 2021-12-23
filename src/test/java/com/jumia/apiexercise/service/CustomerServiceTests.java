@@ -46,8 +46,8 @@ public class CustomerServiceTests {
 
     @Before
     public void setUp() {
-        Customer jumiaCustomer = new Customer(0,"Jumia Customer","(211) 704244430",null);
-        Customer icaroCustomer = new Customer(99,"Icaro Customer","(244) 123456430",null);
+        Customer jumiaCustomer = new Customer(0,"Jumia Customer",null);
+        Customer icaroCustomer = new Customer(99,"Icaro Customer",null);
         
         List<Customer> customers = new ArrayList<Customer>();
         customers.add(jumiaCustomer);
@@ -86,9 +86,9 @@ public class CustomerServiceTests {
 
     @Test
     public void given3Customers_whengetAll_thenReturn2Records() {
-        Customer jumiaCustomer = new Customer(0,"Jumia Customer","(211) 704244430",null);
-        Customer icaroCustomer = new Customer(99,"Icaro Customer","(244) 123456430",null);
-
+        Customer jumiaCustomer = new Customer(0,"Jumia Customer",null);
+        Customer icaroCustomer = new Customer(99,"Icaro Customer",null);
+        
         List<CustomerDto> allCustomers = customerService.listAll();
         verifyFindAllCustomersIsCalledOnce();
         assertThat(allCustomers).hasSize(2).extracting(CustomerDto::getName).contains(jumiaCustomer.getName(), icaroCustomer.getName());

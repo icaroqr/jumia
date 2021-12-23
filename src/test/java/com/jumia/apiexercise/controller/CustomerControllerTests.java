@@ -35,7 +35,7 @@ public class CustomerControllerTests {
 
     @Test
     public void givenCustomer_whenGetCustomers_thenReturnJsonArray() throws Exception{
-        CustomerDto customer = new CustomerDto(0,0,"Jumia Customer","(211) 704244430",null,null);
+        CustomerDto customer = new CustomerDto(0,"Jumia Customer",null);
         List<CustomerDto> customers = new ArrayList<CustomerDto>();
         customers.add(customer);
 
