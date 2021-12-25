@@ -20,22 +20,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.reset;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
 public class PhoneServiceTests {
-
-    @TestConfiguration
-    static class PhoneServiceImplTestContextConfiguration {
-        @Bean
-        public PhoneService phoneService() {
-            return new PhoneService();
-        }
-    }
 
     @Autowired
     private PhoneService phoneService;
