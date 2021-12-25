@@ -5,16 +5,19 @@ A Java project based on a job interview for Jumia
 
 ### Installing
 
-* Install Docker and run the project Image: https://www.docker.com
-* Clone this repository and run with maven: https://maven.apache.org
+* Install Docker: https://www.docker.com
+* After running docker, get the project image with the command:
+```
+docker pull icarorez/api-exercise
+```
 
 ### Executing program
 
-* After installing docker create a container with the image
+* After installing docker and downloading the public image, run a container redirecting to your localhost 8080 port:
 ```
-docker run -p 8080:8080 api-exercise
+docker run -p 8080:8080 icarorez/api-exercise
 ```
-
+Now you should be able to test the API
 
 ## Testing API
 
