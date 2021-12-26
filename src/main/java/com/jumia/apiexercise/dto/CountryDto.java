@@ -14,8 +14,6 @@ public class CountryDto {
 
     private String name;
 
-    private int code;
-
     public static List<CountryDto> toList(List<Country> list) {
         List<CountryDto> dtoList = new ArrayList<CountryDto>();
         for (Country country : list) {
@@ -27,7 +25,6 @@ public class CountryDto {
     public CountryDto(Country country) {
         this.id = country.getId();
         this.name = country.getName();
-        this.code = country.getCode();
     }
     
 }
