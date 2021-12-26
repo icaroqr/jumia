@@ -28,7 +28,16 @@ Restart the container and you should be able to test the API with data
 
 ## Testing API
 
-### cURLs requests
+### Usage
+
+You can use the follow parameters on "/phones/filter" GET request:
+* page = Current page of a pagination
+* size = Number of elements per page
+* sort = Name of the table field to sort
+* country = Filter by the country's phone
+* state = Filter by the state of the phone number (valid or not valid)
+### cURLs example requests
+
 Return all phones
 ```
 curl https://localhost:8080/phones/

@@ -27,4 +27,11 @@ public class ControllerExceptionHandler extends ResponseEntityExceptionHandler{
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
 	}
 
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<ApiError> handleIllegalArgumentException(PropertyReferenceException ex) {
+		ApiError error = new ApiError(HttpStatus.INTERNAL_SERVER_ERROR.value(), ex.getMessage(), new Date());
+		
+		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(error);
+	}
+
 }

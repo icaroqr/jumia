@@ -1,6 +1,7 @@
 package com.jumia.apiexercise.specification;
 
 import com.jumia.apiexercise.domain.Phone;
+import com.jumia.apiexercise.domain.Phone_;
 
 import org.springframework.data.jpa.domain.Specification;
 
@@ -11,7 +12,7 @@ public class PhoneSpecification {
             return null;
         }
         return (root, query, cb) -> {
-            return cb.equal(root.join("country").get("name"),countryName);
+            return cb.equal(root.join(Phone_.COUNTRY).get("name"),countryName);
         };
     } 
     
@@ -20,7 +21,7 @@ public class PhoneSpecification {
             return null;
         }
         return (root, query, cb) -> {
-            return cb.equal(root.get("state"),state);
+            return cb.equal(root.get(Phone_.STATE),state);
         };
     }
      
