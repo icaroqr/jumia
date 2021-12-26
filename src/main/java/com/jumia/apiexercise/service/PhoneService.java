@@ -48,7 +48,7 @@ public class PhoneService {
             PhoneSpecification.equalState(pageRequestModel.getState()));
         
             Page<Phone> page = phoneRepository.findAll(spec,pageable);
-        if(!page.isEmpty()){
+        if(page != null && !page.isEmpty()){
             return new PageModel<PhoneDto>(
                                         (int) page.getTotalElements(),
                                         page.getSize(), 
