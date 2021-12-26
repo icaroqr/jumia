@@ -8,6 +8,7 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import com.jumia.apiexercise.domain.Country;
+import com.jumia.apiexercise.domain.CountryFactory;
 import com.jumia.apiexercise.dto.CountryDto;
 import com.jumia.apiexercise.dto.PhoneDto;
 import com.jumia.apiexercise.exception.NotFoundException;
@@ -31,7 +32,7 @@ public class CountryService {
         List<Country> existingCountriesList = countryRepository.findAll();
         Set<Country> newCountriesList = new HashSet<Country>();
         for (PhoneDto phone : phoneList) {
-            Country c = new Country(phone.getNumber());
+            Country c = CountryFactory.getCountry(phone.getNumber()).get();
             if(!existingCountriesList.contains(c)){
                 newCountriesList.add(c);
             }

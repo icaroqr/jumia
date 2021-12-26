@@ -1,10 +1,12 @@
 package com.jumia.apiexercise.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
 import com.jumia.apiexercise.domain.Country;
+import com.jumia.apiexercise.domain.CountryFactory;
 import com.jumia.apiexercise.domain.Phone;
 import com.jumia.apiexercise.dto.PhoneDto;
 import com.jumia.apiexercise.exception.NotFoundException;
@@ -64,14 +66,16 @@ public class PhoneService {
         List<Phone> phoneList = phoneRepository.findAll();
         for (Phone phone : phoneList) {
             if(phone.getCountry() == null){
-                Country country = new Country(phone.getNumber());
-                phone.setCountry(countryRepository.findByName(country.getName()).get());
-                if(country.getCode() == 0){
-                    phone.setState("not valid");
-                }else{
-                    phone.setState("valid");
+                Optional<Country> country = CountryFactory.getCountry(phone.getNumber());
+                if(country.isPresent()){
+                    phone.setCountry(countryRepository.findByName(country.get().getName()).get());
+                    if(country.get().getName().equals("Invalid country")){
+                        phone.setState("not valid");
+                    }else{
+                        phone.setState("valid");
+                    }
+                    phoneRepository.save(phone);
                 }
-                phoneRepository.save(phone);
             }
         }
         return "Phones Country updated";
