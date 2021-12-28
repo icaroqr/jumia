@@ -17,12 +17,6 @@ public class CustomerDto {
 
     private List<PhoneDto> phones;
 
-    public CustomerDto(Customer customer){
-        this.id = customer.getId();
-        this.name = customer.getName();
-        this.phones = PhoneDto.toList(customer.getPhones());
-    }
-
     public static List<CustomerDto> toList(List<Customer> customerList){
         List<CustomerDto> dtoList = new ArrayList<CustomerDto>();
         for (Customer customer : customerList) {
@@ -30,4 +24,11 @@ public class CustomerDto {
         }
         return dtoList;
     }
+    
+    public CustomerDto(Customer customer){
+        this.id = customer.getId();
+        this.name = customer.getName();
+        this.phones = PhoneDto.toList(customer.getPhones());
+    }
+
 }

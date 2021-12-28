@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -31,10 +32,10 @@ public class PhoneController {
     @GetMapping(value = "/filter", produces="application/json")
 	public ResponseEntity<PageModel<PhoneDto>> findAllFiltering(@RequestParam Map<String, String> params) {
 		PageRequestModel pageRequestModel = new PageRequestModel(params);
-        return ResponseEntity.status(HttpStatus.FOUND).body(phoneService.listAllFilteringPagingAndOrdering(pageRequestModel));
+        return ResponseEntity.status(HttpStatus.OK).body(phoneService.listAllFilteringPagingAndOrdering(pageRequestModel));
 	}
 
-    @GetMapping(value = "/fillPhoneCountry", produces="application/json")
+    @PostMapping(value = "/fillPhoneCountry", produces="text")
 	public ResponseEntity<String> fillPhoneCountry() {
         return ResponseEntity.status(HttpStatus.CREATED).body(phoneService.fillPhoneCountry());
 	}
